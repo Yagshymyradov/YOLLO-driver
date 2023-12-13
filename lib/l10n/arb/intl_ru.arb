@@ -1,0 +1,160 @@
+{
+  "@@locale": "ru",
+
+  "localeCode": "ru",
+  "nativeLocaleName": "Русский",
+
+  "registration":"Регистрация",
+  "writePhoneNumber":"Введите свой номер телефона!",
+  "inCorrectPhoneNumber":"неправильный номер!",
+  "password":"пароль",
+  "writePassword":"Введите ваш пароль!",
+  "noInternet":"Нет интернета!",
+  "hasErrorPleaseReaped":"Произошла ошибка. Пожалуйста, попробуйте еще раз!",
+  "inCorrectNumberOrPassword":"неправильный номер телефона или пароль!",
+  "login":"Войти",
+  "forgotPassword":"забыл пароль",
+  "writeCorrectNumber":"Введите правильный номер!",
+  "passwordLengthError":"Пароль должно содержать менее 6 символов!",
+  "fio": "Имя и фамилия",
+  "emailHint": "Email (Необязательно)",
+  "address": "Адрес",
+  "newPassword": "Новый пароль",
+  "confirmPassword": "Проверочный код",
+  "companyName": "Название компании",
+  "signUp": "Зарегистрироваться",
+  "readAndConfirm": "Прочитал и согласен",
+  "userConfirm": "Пользовательское Соглашение",
+  "addressInPassport": "Адрес (как в паспорте)",
+  "carModel": "Тип и номер транспортного средства",
+  "acceptedOrder": "Ваш заказ принят",
+  "yollo": "YOLLO",
+  "aboutApp": "Это служба, предоставляющая услуги доставки между велаятами и внутри Ашхабада.",
+  "workTime": "Рабочее время",
+  "callTaxi": "Позвоните водителю",
+  "autoCompleteOrder": "Автоматическое заполнение заказа",
+  "sendCargo": "Ýüki Ýollo",
+  "completeOrder": "Заполните заказ вручную",
+  "sender": "Отправитель",
+  "aboutProduct": "Вес, размер в сантиметрах, описание товара.",
+  "price": "Цена",
+  "delivery": "Доставка",
+  "before": "Заранее",
+  "weight": "Масса",
+  "selectRegion": "Выберите регион",
+  "selectCity": "Выберите город",
+  "after": "После",
+  "payment": "Оплата",
+  "kg": "Кг",
+  "m3": "м3",
+  "status": "Статус",
+  "username": "Имя",
+
+  "volume": "Объем",
+  "recipient": "Получатель",
+  "saveIt": "Сохранить",
+  "news": "Новости",
+  "follow": "Следи",
+  "profile": "Профиль",
+  "changeLanguage": "Изменить язык",
+  "tm": "Тм",
+  "rus": "Рус",
+  "changeProfile": "Изменить профиль",
+  "termsAndPolitics": "Условия и политика",
+  "helpSupport": "Помощь & Поддержка",
+  "callOperator": "Позвонить оператору",
+  "siteYollo": "Yollo.com.tm",
+  "logOut": "выход",
+  "fillName": "Введите ваше имя",
+  "fillSpace": "Заполнить бланк",
+  "chooseRegion": "Выберите регион",
+  "chooseCity": "Выберите город",
+  "operatorsWillCall" : "Операторы свяжутся с вами в ближайшее время",
+  "justNow" : "Сейчас",
+  "fillBlank": "Заполните бланк",
+  "language": "Язык",
+
+  "januaryShort": "Jan.",
+  "februaryShort": "Feb.",
+  "marchShort": "March",
+  "aprilShort": "April",
+  "mayShort": "May",
+  "juneShort": "June",
+  "julyShort": "July",
+  "augustShort": "Aug.",
+  "septemberShort": "Sep.",
+  "octoberShort": "Oct.",
+  "novemberShort": "Nov.",
+  "decemberShort": "Dec.",
+  "noName": "Имя не указано",
+  "specialWish" : "Особое пожелание:",
+  "noItemsFound": "Ничего не найдено",
+  "listIsEmpty": "Список пуст",
+
+
+  "@_with_placeholders": "",
+  "placeholdersExample": "first placeholder: {first}, second placeholder: {second}",
+  "@placeholdersExample": {
+    "placeholders": {
+      "first": {
+        "type": "int"
+      },
+      "second": {
+        "type": "int"
+      }
+    }
+  },
+
+  "intervalSeconds": "{seconds} секунд",
+  "@intervalSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+
+  "intervalSecondsShort": "{seconds} сек.",
+  "@intervalSecondsShort": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "lastTimeInMinutes" : "{minute} мин",
+  "@lastTimeInMinutes": {
+    "placeholders": {
+      "minute": {
+        "type": "int"
+      }
+    }
+  },
+
+  "lastTimeInHours" : "{hour} часа",
+  "@lastTimeInHours": {
+    "placeholders": {
+      "hour": {
+        "type": "int"
+      }
+    }
+  },
+  "sm": "{sm} см",
+  "@sm": {
+    "placeholders": {
+      "sm": {
+        "type": "int"
+      }
+    }
+  },
+
+  "@_plurals": "",
+  "pluralExample": "{count,plural, =1{{count} товар} few{{count} товара} many{{count} товаров} other{{count} товаров}}",
+  "@pluralExample": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
+}
