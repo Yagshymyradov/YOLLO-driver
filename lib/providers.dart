@@ -70,8 +70,8 @@ final httpClientProvider = Provider(
 
             error.requestOptions.headers[HttpHeaders.authorizationHeader] =
                 'Bearer ${newToken.refresh}';
-
-            return handler.resolve(await httpClient.dio.fetch<String>(error.requestOptions));
+            //
+            // return handler.resolve(await httpClient.dio.fetch<String>(error.requestOptions));
           }
           return handler.next(error);
         },
