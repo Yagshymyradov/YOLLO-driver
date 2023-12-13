@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -8,7 +7,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'data/api_client.dart';
 import 'data/auth_controller.dart';
 import 'data/json_http_client.dart';
-import 'data/response.dart';
 import 'data/service/preferences.dart';
 import 'data/settings_controller.dart';
 
@@ -40,16 +38,16 @@ final apiBaseUrlProvider = Provider((ref) => 'https://yollo.com.tm/yolloadmin/ap
 final httpClientProvider = Provider(
   (ref) {
     final httpClient = JsonHttpClient();
-    Dio? refreshTokenRequest;
+
+    /*lateinit*/
+    JsonHttpClient? refreshTokenHttpClient;
+    /*lateinit*/
+    ApiClient? refreshTokenApiClient;
 
     httpClient.dio.interceptors.addAll([
-      //TODO: ADD logger interceptor
-
       InterceptorsWrapper(
         onRequest: (options, handler) {
           final authToken = ref.read(authControllerProvider);
-          log('options---->${options.path}');
-          log('optionsBody---->${options.data}');
           try {
             if (authToken != null) {
               options.headers[HttpHeaders.authorizationHeader] = 'Bearer ${authToken.authToken}';
@@ -60,19 +58,40 @@ final httpClientProvider = Provider(
           handler.next(options);
         },
         onError: (error, handler) async {
-          final authToken = ref.read(authControllerProvider);
-          log('Here ---> ${error.response}');
+          log(error.message.toString());
           if (error.response?.statusCode == 401) {
+            final authController = ref.read(authControllerProvider.notifier);
+            if (authController.isAuthorized) {
+              final refreshToken = authController.refreshToken!;
 
-            final newToken = await ApiClient(JsonHttpClient())
-                .refreshToken(authToken?.refreshToken ?? '');
-            log('newToken ------>>>>>${newToken.refresh}');
+              refreshTokenHttpClient ??= JsonHttpClient();
+              refreshTokenApiClient ??= ApiClient(refreshTokenHttpClient!);
 
-            error.requestOptions.headers[HttpHeaders.authorizationHeader] =
-                'Bearer ${newToken.refresh}';
-            //
-            // return handler.resolve(await httpClient.dio.fetch<String>(error.requestOptions));
+              try {
+                final refreshedToken = await refreshTokenApiClient!.refreshToken(refreshToken);
+                await authController.updateAccessToken(refreshedToken.access);
+
+                error.requestOptions.headers[HttpHeaders.authorizationHeader] =
+                    'Bearer ${refreshedToken.access}';
+
+                final response =
+                    await refreshTokenHttpClient!.dio.fetch<dynamic>(error.requestOptions);
+                return handler.resolve(response);
+              } catch (e) {
+                //ignored
+              }
+            }
+
+            ref.listen(
+              apiBaseUrlProvider,
+                  (previous, next) {
+                final apiBaseUrl = next;
+                refreshTokenHttpClient!.dio.options.baseUrl = apiBaseUrl;
+              },
+              fireImmediately: true,
+            );
           }
+
           return handler.next(error);
         },
       ),

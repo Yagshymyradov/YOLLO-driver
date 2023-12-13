@@ -79,6 +79,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
+          ref.invalidate(ordersProvider);
           pagingController.refresh();
         },
         child: ListView(
@@ -97,6 +98,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               pagingController: pagingController,
               builderDelegate: PagedChildBuilderDelegate(
                 itemBuilder: (context, item, index) {
+                  log(pagingController.error.toString());
                   log(pagingController.error.toString());
                   return OrderTile(order: item);
                 },

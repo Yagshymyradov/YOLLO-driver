@@ -45,10 +45,21 @@ class ApiClient {
     );
   }
 
-  Future<LoginResponse> logOut(String? accessToken) {
+  Future<void> logOut(String? accessToken) {
     return _httpClient.post(
       Endpoints.logOut,
-      mapper: (dynamic data) => LoginResponse.fromJson(data as Map<String, dynamic>),
+      needDecodeBody: false,
+      mapper: (dynamic data) => /*no-op*/ 0,
+    );
+  }
+
+  Future<RefreshTokenResponse> refreshToken(String token) async {
+    return _httpClient.post(
+      Endpoints.refreshToken,
+      body: <String, dynamic>{
+        'refresh': token,
+      },
+      mapper: (dynamic data) => RefreshTokenResponse.fromJson(data as Map<String, dynamic>),
     );
   }
 
@@ -66,17 +77,6 @@ class ApiClient {
     return _httpClient.get(
       Endpoints.ordersBoxById(id),
       mapper: (dynamic data) => OrderDetails.fromJson(data as Map<String, dynamic>),
-    );
-  }
-
-  Future<RefreshTokenResponse> refreshToken(String tokenResponse) async {
-    // log('tOKEN REPO --> ${tokenResponse.toJson()}');
-    return _httpClient.post(
-      Endpoints.refreshToken,
-      body: <String, dynamic>{
-        'refresh': tokenResponse,
-      },
-      mapper: (dynamic data) => RefreshTokenResponse.fromJson(data as Map<String, dynamic>),
     );
   }
 

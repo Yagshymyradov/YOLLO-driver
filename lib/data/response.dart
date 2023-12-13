@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 import '../utils/enums.dart';
@@ -45,15 +45,17 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }
-@JsonSerializable(createToJson: true)
-class RefreshTokenResponse{
-  final String refresh;
 
-  RefreshTokenResponse({required this.refresh});
+@JsonSerializable()
+class RefreshTokenResponse {
+  final String access;
 
-  factory RefreshTokenResponse.fromJson(Map<String, dynamic> json)=> _$RefreshTokenResponseFromJson(json);
+  RefreshTokenResponse({
+    required this.access,
+  });
 
-  Map<String, dynamic> toJson() => _$RefreshTokenResponseToJson(this);
+  factory RefreshTokenResponse.fromJson(Map<String, dynamic> json) =>
+      _$RefreshTokenResponseFromJson(json);
 }
 
 @JsonSerializable()
@@ -249,7 +251,7 @@ class RegionResults {
 }
 
 @JsonSerializable(createToJson: true)
-class CreateOrderBox{
+class CreateOrderBox {
   @JsonKey(name: 'clientfrom')
   final String? clientFrom;
   @JsonKey(name: 'clientto')

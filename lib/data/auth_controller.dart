@@ -1,11 +1,8 @@
 // ignore_for_file: constant_identifier_names
 // ignore: depend_on_referenced_packages
-import 'dart:developer';
-
 import 'package:state_notifier/state_notifier.dart';
-import 'package:yollo_driver/data/response.dart';
 
-import '../utils/enums.dart';
+import 'response.dart';
 import 'service/preferences.dart';
 
 class UserState {
@@ -44,6 +41,8 @@ class AuthController extends StateNotifier<UserState?> {
 
   final AppPrefsService _service;
 
+  bool get isAuthorized => state != null;
+
   String? get authToken => state?.authToken;
 
   String? get refreshToken => state?.refreshToken;
@@ -78,8 +77,6 @@ class AuthController extends StateNotifier<UserState?> {
   }
 
   Future<void> onSignedIn(LoginResponse response) async {
-    log('authToken ---->>> ${response.accessToken}');
-    log('refreshToken ---->>> ${response.refreshToken}');
     final newState = UserState(
       username: response.user.username,
       driverType: response.user.type,
@@ -93,6 +90,25 @@ class AuthController extends StateNotifier<UserState?> {
       await _service.setString(_RefreshToken, newState.refreshToken);
       await _service.setString(_UserName, newState.username);
       await _service.setString(_DriverType, newState.driverType);
+    } catch (e) {
+      //ignored
+    }
+  }
+
+  Future<void> updateAccessToken(String accessToken) async {
+    final oldState = state;
+    assert(oldState != null);
+
+    if (oldState == null) {
+      throw ArgumentError("[updateUser] can't be called in unauthorized state");
+    }
+
+    final newState = oldState.copyWith(
+      authToken: accessToken,
+    );
+
+    try {
+      await _service.setString(_AuthToken, newState.authToken);
     } catch (e) {
       //ignored
     }
