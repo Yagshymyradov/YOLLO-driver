@@ -7,4 +7,4 @@ nullable-getter: false
 preferred-supported-locales:
   - ru
   - tk
-  - en
+#  - en
